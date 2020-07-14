@@ -37,10 +37,11 @@ def detail_page():
     if request.method == 'POST':
         student_name = request.form['name']
         student_roll_no = request.form['roll_no']
-        new_student = StudentDetails(name=student_name, roll_no= student_roll_no)
+        student_phone = request.form['phone']
+        new_student = StudentDetails(name=student_name, roll_no= student_roll_no, phone= student_phone)
         db.session.add(new_student)
         db.session.commit()
-        return redirect('/posts')
+        return redirect('/details')
     else:
         all_details= StudentDetails.query.order_by(StudentDetails.roll_no).all()
         return render_template('detail.html',detail_page=all_details)

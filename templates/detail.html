@@ -14,9 +14,11 @@
     <form action="/details" method="POST">
         Name: <input type="text" name="name" id="name">
         <br>
-        Roll No: <input type="number" name="roll_no" id="roll_no">
+        Roll No: <input type="number" name="roll_no" id="roll_no" required>
         <br>
-        <input type="submit" value="Enter">
+        Phone: <input type="number" name="phone" id="phone">
+        <br>
+        <input type="submit" value="Enroll">
     </form>
     <hr>
 
@@ -28,5 +30,6 @@
         {%else%}
             <p>Phone: N/A</p>
         {%endif%}
+        <p>Enrolled on:{{detail.date_enrolled}}</p>
     {%endfor%}
 {% endblock %}
