@@ -1,0 +1,32 @@
+{% extends 'base.html'%}
+
+{% block head %} 
+    <title>Details</title>
+{% endblock %}
+
+
+
+{% block body %}
+    <h1>All details</h1>
+
+    <hr>
+    <h2>Enroll New Student</h2>
+    <form action="/details" method="POST">
+        Name: <input type="text" name="name" id="name">
+        <br>
+        Roll No: <input type="number" name="roll_no" id="roll_no">
+        <br>
+        <input type="submit" value="Enter">
+    </form>
+    <hr>
+
+    {%for detail in detail_page%}
+        <h2>Name: {{detail.name}}</h2>
+        <p>Roll no.: {{detail.roll_no}}</p>
+        {%if detail.phone%}
+            <p>Phone: {{detail.phone}}</p>
+        {%else%}
+            <p>Phone: N/A</p>
+        {%endif%}
+    {%endfor%}
+{% endblock %}
