@@ -16,17 +16,6 @@ class StudentDetails(db.Model):
     def __repr__(self):
         return 'Student ' + str(self.id)
 
-all_details=[
-    {
-        'name': 'Bishal Joshi',
-        'roll_no': '19',
-        'phone': '9861292306'
-    },
-    {
-        'name': 'Ramraj Chimouriya',
-        'roll_no': '11'
-    }
-]
 
 @app.route('/')
 def home_page():
@@ -44,7 +33,29 @@ def detail_page():
         return redirect('/details')
     else:
         all_details= StudentDetails.query.order_by(StudentDetails.roll_no).all()
-        return render_template('detail.html',detail_page=all_details)
+        return render_template('detail.html',details=all_details)
+
+@app.route('/details/delete/<int:id>')
+def delete(id):
+    detail = StudentDetails.query.get_or_404(id)
+    db.session.delete(detail)
+    db.session.commit()
+    return redirect('/details')
+
+@app.route('/details/edit/<int:id>',methods=['GET','POST'])
+def edit(id):
+
+    detail = StudentDetails.query.get_or_404(id)
+    
+    if request.method == 'POST':
+        detail.name = request.form['name']
+        detail.roll_no = request.form['roll_no']
+        detail.phone = request.form['phone']
+        db.session.commit()
+        return redirect('/details')
+    else:
+        return render_template('edit.html', detail=detail)
+
 
 if __name__=="__main__":
     app.run(debug=True)

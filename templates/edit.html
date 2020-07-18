@@ -1,0 +1,24 @@
+{% extends 'base.html'%}
+
+{% block head %} 
+    <title>Edit</title>
+{% endblock %}
+
+
+
+
+{% block body %}
+    <h1>Editing Details</h1>
+
+    <hr>
+    <h2>Edit</h2>
+    <form action="/details/edit/{{detail.id}}" method="POST">
+        Name: <input type="text" name="name" id="name" value={{detail.name}}>
+        <br>
+        Roll No: <input type="number" name="roll_no" id="roll_no" value={{detail.roll_no}} required>
+        <br>
+        Phone: <input type="number" name="phone" id="phone" value={{detail.phone}}>
+        <br>
+        <input type="submit" value="Save">
+    </form>
+{% endblock %}
