@@ -13,12 +13,13 @@
     <hr>
     <h2>Edit</h2>
     <form action="/details/edit/{{detail.id}}" method="POST">
-        Name: <input type="text" name="name" id="name" value={{detail.name}}>
+        <label for="name">Name:</label>  
+        <input class="form-control" type="text" name="name" id="name" value="{{detail.name}}" placeholder="Enter Name" aria-label="Enter Name" required>
+        <label for="roll_no">Roll No:</label> 
+        <input class="form-control" type="text" name="roll_no" id="roll_no" value="{{detail.roll_no}}" placeholder="Enter Roll No" aria-label="Enter Roll No" required>
+        <label for="phone">Phone:</label> 
+        <input class="form-control" type="text" name="phone" id="phone" value="{{detail.phone}}" placeholder="Enter Phone" aria-label="Enter Phone">
         <br>
-        Roll No: <input type="number" name="roll_no" id="roll_no" value={{detail.roll_no}} required>
-        <br>
-        Phone: <input type="number" name="phone" id="phone" value={{detail.phone}}>
-        <br>
-        <input type="submit" value="Save">
+        <input class="btn btn-primary" type="submit" value="Save">
     </form>
 {% endblock %}
