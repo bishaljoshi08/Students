@@ -1,40 +1,86 @@
 {% extends 'base.html'%}
 
-{% block head %} 
-    <title>Details</title>
+{% block head %}
+<title>Details</title>
 {% endblock %}
 
 
 {% block body %}
-    <h2>Enroll New Student</h2>
-    <br>
-    <form class="form my-2 my-md-0" action="/details" method="POST">
-        <label for="name">Name:</label>  
-        <input class="form-control" type="text" name="name" id="name" placeholder="Enter Name" aria-label="Enter Name" required>
-        <label for="roll_no">Roll No:</label> 
-        <input class="form-control" type="text" name="roll_no" id="roll_no"  placeholder="Enter Roll No" aria-label="Enter Roll No" required>
-        <label for="phone">Phone:</label> 
-        <input class="form-control" type="text" name="phone" id="phone" placeholder="Enter Phone" aria-label="Enter Phone">
-        <br>
-        <input class="btn btn-success" type="submit" value="Enroll">
-    </form>
-    <hr>
-    <h2>All details</h2>
-    <hr>
+<h2>Enroll New Student</h2>
+<br>
+<form class="form my-2 my-md-0" action="/details" method="POST">
+    {{form.hidden_tag()}}
 
-    {%for detail in details%}
-        <big>Name: {{detail.name}}</big>
-        <br>
-        <small>Roll no.: {{detail.roll_no}} </small>
-        <br>
-        {%if detail.phone%}
-            <small>Phone: {{detail.phone}}</small> 
-        {%else%}
-            <small>Phone: N/A</small> 
-        {%endif%}
-        <br>
-        <a class="btn btn-danger btn-sm" href="/details/delete/{{detail.id}}">Delete</a>
-        <a class= "btn btn-warning btn-sm" href="/details/edit/{{detail.id}}">Edit</a>
-        <hr>
-    {%endfor%}
+    {{form.name.label(class="form-control-label")}}
+
+    {% if form.name.errors %}
+    {{form.name(class="form-control is-invalid",placeholder="Enter Name")}}
+    <div class="invalid-feedback">
+        {% for error in form.name.errors %}
+        <span>
+            {{ error }}
+        </span>
+        {% endfor %}
+    </div>
+    {%else%}
+        {{form.name(class="form-control",placeholder="Enter Name")}}
+    {% endif %}
+
+
+    {{form.roll_no.label(class="form-control-label")}}
+
+    {% if form.roll_no.errors %}
+        {{form.roll_no(class="form-control is-invalid",placeholder="Enter Roll No")}}
+        <div class="invalid-feedback">
+            {% for error in form.roll_no.errors %}
+            <span>
+                {{ error }}
+            </span>
+            {% endfor %}
+        </div>
+    {%else%}
+        {{form.roll_no(class="form-control",placeholder="Enter Roll No")}}
+    {% endif %}
+    {{form.phone.label(class="form-control-label")}}
+
+    {% if form.phone.errors %}
+        {{form.phone(class="form-control is-invalid",placeholder="Enter Phone")}}
+        <div class="invalid-feedback">
+            {% for error in form.phone.errors %}
+                <span>
+                    {{ error }}
+                </span>
+            {% endfor %}
+        </div>
+    {%else%}
+        {{form.phone(class="form-control",placeholder="Enter Phone")}}
+    {% endif %}
+
+    <!--   <label for="name" class="form-control-label">Name:</label>  
+        <input class="form-control" type="text" name="name" id="name" placeholder="Enter Name" aria-label="Enter Name" required>
+        <label for="roll_no" class="form-control-label">Roll No:</label> 
+        <input class="form-control" type="text" name="roll_no" id="roll_no"  placeholder="Enter Roll No" aria-label="Enter Roll No" required>
+        <label for="phone" class="form-control-label">Phone:</label> 
+        <input class="form-control" type="text" name="phone" id="phone" placeholder="Enter Phone" aria-label="Enter Phone"> -->
+    <br>
+    <input class="btn btn-success" type="submit" value="Enroll">
+</form>
+<hr>
+<h2>All details</h2>
+<hr>
+
+{%for detail in details%}
+<big>Name: {{detail.name}}</big>
+<br>
+<small>Roll no.: {{detail.roll_no}} </small>
+<br>
+
+<small>Phone: {{detail.phone}}</small>
+
+
+<br>
+<a class="btn btn-danger btn-sm" href="/details/delete/{{detail.id}}">Delete</a>
+<a class="btn btn-warning btn-sm" href="/details/edit/{{detail.id}}">Edit</a>
+<hr>
+{%endfor%}
 {% endblock %}

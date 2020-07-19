@@ -12,7 +12,7 @@
 
     <hr>
     <h2>Edit</h2>
-    <form action="/details/edit/{{detail.id}}" method="POST">
+    <!--<form action="/details/edit/{{detail.id}}" method="POST">
         <label for="name">Name:</label>  
         <input class="form-control" type="text" name="name" id="name" value="{{detail.name}}" placeholder="Enter Name" aria-label="Enter Name" required>
         <label for="roll_no">Roll No:</label> 
@@ -21,5 +21,55 @@
         <input class="form-control" type="text" name="phone" id="phone" value="{{detail.phone}}" placeholder="Enter Phone" aria-label="Enter Phone">
         <br>
         <input class="btn btn-primary" type="submit" value="Save">
+    </form>-->
+    <form class="form my-2 my-md-0" action="/details/edit/{{detail.id}}" method="POST">
+        {{form.hidden_tag()}}
+    
+        {{form.name.label(class="form-control-label")}}
+    
+        {% if form.name.errors %}
+        {{form.name(class="form-control is-invalid",placeholder="Enter Name" ,value=detail.name)}}
+        <div class="invalid-feedback">
+            {% for error in form.name.errors %}
+            <span>
+                {{ error }}
+            </span>
+            {% endfor %}
+        </div>
+        {%else%}
+            {{form.name(class="form-control",placeholder="Enter Name",value=detail.name)}}
+        {% endif %}
+    
+    
+        {{form.roll_no.label(class="form-control-label")}}
+    
+        {% if form.roll_no.errors %}
+            {{form.roll_no(class="form-control is-invalid",placeholder="Enter Roll No" ,value=detail.roll_no)}}
+            <div class="invalid-feedback">
+                {% for error in form.roll_no.errors %}
+                <span>
+                    {{ error }}
+                </span>
+                {% endfor %}
+            </div>
+        {%else%}
+            {{form.roll_no(class="form-control",placeholder="Enter Roll No",value=detail.roll_no)}}
+        {% endif %}
+        {{form.phone.label(class="form-control-label")}}
+    
+        {% if form.phone.errors %}
+            {{form.phone(class="form-control is-invalid",placeholder="Enter Phone",value=detail.phone)}}
+            <div class="invalid-feedback">
+                {% for error in form.phone.errors %}
+                    <span>
+                        {{ error }}
+                    </span>
+                {% endfor %}
+            </div>
+        {%else%}
+            {{form.phone(class="form-control",placeholder="Enter Phone" ,value=detail.phone)}}
+        {% endif %}
+        <br>
+        <input class="btn btn-success" type="submit" value="Save">
     </form>
 {% endblock %}
