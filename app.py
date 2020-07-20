@@ -37,6 +37,9 @@ def detail_page():
             db.session.commit()
             all_details= StudentDetails.query.order_by(StudentDetails.roll_no).all()
             return redirect('/details')
+        else:
+            all_details= StudentDetails.query.order_by(StudentDetails.roll_no).all()
+            return render_template('detail.html', details=all_details, form=form)
     else:
         all_details= StudentDetails.query.order_by(StudentDetails.roll_no).all()
         return render_template('detail.html', details=all_details, form=form)
